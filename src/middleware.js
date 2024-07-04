@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(req) {
-  const ip = req.headers.get('x-forwarded-for') || req.ip || req.connection?.remoteAddress;
-  console.log('IP Address:', ip);
+  const forwarded = req.headers.get('x-forwarded-for');
+  const ip = forwarded ? forwarded.split(/, /)[0] : req.ip;
 
-  // Puedes agregar la IP al request para usarla más adelante
-  req.nextUrl.searchParams.set('ip', ip);
+  const response = NextResponse.next();
+  response.cookies.set('ip', ip);
+  console.log('IP Middelware:', ip);
 
-  return NextResponse.next();
+  return response;
 }

@@ -5,8 +5,16 @@ import ProjectsSection from "./components/ProjectsSection";
 import EmailSection from "./components/EmailSection";
 import Footer from "./components/Footer";
 import AchievementsSection from "./components/AchievementsSection";
+import { cookies } from 'next/headers';
 
-export default function Home() {
+async function getIp() {
+  const cookieStore = cookies();
+  const ip = cookieStore.get('ip')?.value || 'IP no encontrada';
+  return ip;
+}
+
+export default async function Home() {
+  const ip = await getIp();
   return (
     <main className="flex min-h-screen flex-col bg-[#121212]">
       <Navbar />
@@ -18,16 +26,7 @@ export default function Home() {
         <EmailSection />
       </div>
       <Footer />
+      <h1 className="hidden">Tu dirección IP es: {ip}</h1>
     </main>
   );
-}
-
-export async function getData(context) {
-  const ip = context.query.ip || 'IP no encontrada';
-
-  console.log('IP Address:', ip);
-
-  return {
-    props: { ip },
-  };
 }
