@@ -21,3 +21,13 @@ export default function Home() {
     </main>
   );
 }
+
+export async function getData(context) {
+  const ip = context.query.ip || 'IP no encontrada';
+
+  console.log('IP Address:', ip);
+
+  return {
+    props: { ip },
+  };
+}
