@@ -15,6 +15,9 @@ const EmailSection = () => {
       subject: e.target.subject.value,
       message: e.target.message.value,
     };
+
+    console.log(data);
+    
     const JSONdata = JSON.stringify(data);
     const endpoint = "/api/send";
 
@@ -32,7 +35,8 @@ const EmailSection = () => {
 
     const response = await fetch(endpoint, options);
     const resData = await response.json();
-
+    console.log(response);
+    
     if (response.status === 200) {
       console.log("Message sent.");
       setEmailSubmitted(true);
@@ -44,7 +48,7 @@ const EmailSection = () => {
       id="contact"
       className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative"
     >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
+      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute -left-4 transform -translate-x-1/2 -translate-1/2"></div>
       <div className="z-10">
         <h5 className="text-xl font-bold text-white my-2">
           Redes sociales
@@ -65,8 +69,8 @@ const EmailSection = () => {
       </div>
       <div>
         {emailSubmitted ? (
-          <p className="text-green-500 text-sm mt-2">
-            Email enviado correctamente
+          <p className="text-green-500 text-sm mt-2 mb-12">
+            Mensaje enviado correctamente, tambien has debido recibir un mail en tu bandeja de entrada o bandeja de spam
           </p>
         ) : (
           <form className="flex flex-col" onSubmit={handleSubmit}>

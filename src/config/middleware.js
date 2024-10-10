@@ -6,7 +6,7 @@ export function middleware(req) {
 
   const response = NextResponse.next();
   response.cookies.set('ip', ip);
-  console.log('IP Middelware:', ip);
+  // console.log('IP Middelware:', ip);
 
   return response;
 }

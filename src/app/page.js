@@ -6,6 +6,7 @@ import EmailSection from "./components/EmailSection";
 import Footer from "./components/Footer";
 import AchievementsSection from "./components/AchievementsSection";
 import { cookies } from 'next/headers';
+require('dotenv').config();
 
 async function getIp() {
   const cookieStore = cookies();

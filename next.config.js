@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = { 
+      fs: false,};
+
+    return config;
+  },
+}
 
 module.exports = nextConfig
 
@@ -11,7 +19,7 @@ module.exports = {
     return [
       {
         source: '/(.*)',
-        destination: '/middleware',
+        destination: '@/config/middleware',
         permanent: false,
       },
     ];
